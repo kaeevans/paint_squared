@@ -2,8 +2,11 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import controller.Command;
@@ -15,7 +18,15 @@ import controller.Tuple;
  * Client - Server Protocol Tests for each type of Token
  */
 
+
 public class ProtocolTest {
+	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+
+	@Before
+	public void setUpStreams() {
+	    System.setErr(new PrintStream(errContent));
+	}
+	
     @Test
     //testing CREATE token
     public void create_test_protocol(){
@@ -142,9 +153,23 @@ public class ProtocolTest {
     }
     
     @Test
+    // Test color_fill protocol
+    public void color_fill_test_protocol(){
+    	Protocol p = new Protocol("[COLOR_FILL][roomname][color][gridX][gridY]");
+    	assertEquals(p.command, Command.COLOR_FILL);
+    	assertEquals(p.nameField, "roomname");
+    	assertEquals(p.colorField, "color");
+    	assertEquals(p.gridX, "gridX");
+    	assertEquals(p.gridY, "gridY");
+    }
+    
+    @Test
     //Test some corrupted protocols
     public void corrupt_protocol(){
         Protocol p = new Protocol("[LAZERGUN][huh?][wellthisisweird]");
         assertEquals(p.command, Command.NONE);
+        
+        //command should correctly be set to none. All other commands will write to System.err
+        //TODO: perhaps automate System.err checking using ByteArrayOutputStream or similar
     }
 }

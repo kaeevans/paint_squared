@@ -229,6 +229,15 @@ public class Controller implements Runnable{
     			}
     			break;
     			
+    		case COLOR_FILL:
+    			//send color, gridX,gridY data to all user in roomname
+    			List<String> painters = theModel.getAttendees(p.nameField); //extracts painters in roomname
+    			for(ClientHandler c : clients) { // loop through every connected user...
+    				if(painters.contains(c.alias)) // ...and find those in attendance in the room
+    					c.send(new Protocol(Command.COLOR_FILL,p.nameField,p.colorField,p.gridX,p.gridY));
+    			}
+    			break;
+    			
     		// Warning message for all protocols which the server cannot execute
     		default:
     			System.err.println("Warning, server should not be receiving message: "+p.command.toString());

@@ -40,7 +40,7 @@ public class Server {
 		
 		try {
 			
-			while (true) {
+			while (true) { // **busy wait loop. Consider Changing to signaling/interrupt apporach
 				
 				// Wait until someone connects.
 				System.out.println("Accepting connections...");

@@ -64,6 +64,13 @@ public class ClientHandler implements Runnable{
 			for(String s: p.userList)
 				write.print("["+s+"]");
 			break;
+		case COLOR_FILL:
+			write.print("["+p.nameField+"]");
+			write.print("["+p.colorField+"]");
+			write.print("["+p.gridX+"]");
+			write.print("["+p.gridY+"]");
+			break;
+			
 		default:
 			write.print("["+p.nameField+"]");
 		}
