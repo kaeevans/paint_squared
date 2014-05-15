@@ -471,8 +471,19 @@ public class HomeWindow extends JFrame {
                 });
                 break;
                 
-            case COLOR_FILL: // likely uneeded in the HomeWindow
+            case COLOR_CLICK: 
             	//perform coloring updates
+            	System.err.println("in home->COLOR_CLICK");
+            	break;
+            	
+            case COLOR_MOVE: 
+            	//perform coloring updates
+            	//System.err.println("in home->COLOR_MOVE");
+            	SwingUtilities.invokeLater(new Runnable() {
+            		public void run() {
+            			chatWindow.update(update);
+            		}
+            	});
             	break;
                 
             default:

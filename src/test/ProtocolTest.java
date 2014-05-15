@@ -155,12 +155,14 @@ public class ProtocolTest {
     @Test
     // Test color_fill protocol
     public void color_fill_test_protocol(){
-    	Protocol p = new Protocol("[COLOR_FILL][roomname][color][gridX][gridY]");
-    	assertEquals(p.command, Command.COLOR_FILL);
+    	Protocol p = new Protocol("[COLOR_MOVE][roomname][r,g,b][oldX][oldY][currentX][currentY]");
+    	assertEquals(p.command, Command.COLOR_MOVE);
     	assertEquals(p.nameField, "roomname");
-    	assertEquals(p.colorField, "color");
-    	assertEquals(p.gridX, "gridX");
-    	assertEquals(p.gridY, "gridY");
+    	assertEquals(p.colorField, "r,g,b");
+    	assertEquals(p.oldX, "oldX");
+    	assertEquals(p.oldY, "oldY");
+    	assertEquals(p.currentX, "currentX");
+    	assertEquals(p.currentY, "currentY");
     }
     
     @Test

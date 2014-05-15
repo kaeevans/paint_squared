@@ -229,12 +229,21 @@ public class Controller implements Runnable{
     			}
     			break;
     			
-    		case COLOR_FILL:
+    		case COLOR_CLICK:
     			//send color, gridX,gridY data to all user in roomname
     			List<String> painters = theModel.getAttendees(p.nameField); //extracts painters in roomname
     			for(ClientHandler c : clients) { // loop through every connected user...
     				if(painters.contains(c.alias)) // ...and find those in attendance in the room
-    					c.send(new Protocol(Command.COLOR_FILL,p.nameField,p.colorField,p.gridX,p.gridY));
+    					c.send(new Protocol(Command.COLOR_CLICK,p.nameField,p.colorField,p.oldX,p.oldY));
+    			}
+    			break;
+    			
+    		case COLOR_MOVE:
+    			//send color, gridX,gridY data to all user in roomname
+    			List<String> paintersMove = theModel.getAttendees(p.nameField); //extracts painters in roomname
+    			for(ClientHandler c : clients) { // loop through every connected user...
+    				if(paintersMove.contains(c.alias)) // ...and find those in attendance in the room
+    					c.send(new Protocol(Command.COLOR_MOVE,p.nameField,p.colorField,p.oldX,p.oldY, p.currentX, p.currentY));
     			}
     			break;
     			

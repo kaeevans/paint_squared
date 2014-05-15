@@ -11,7 +11,7 @@ public class Protocol {
 
 	public Command command;
 	public String nameField, textField, colorField;
-	public String gridX, gridY;
+	public String oldX, oldY, currentX, currentY;
 	public List<String> messageField, userList;
 	public List<Tuple> roomList;
 	public ClientHandler source;
@@ -37,8 +37,10 @@ public class Protocol {
 		colorField = ""; // New field to specify color. Could piggyback on textField. Separated for clarity.
 		
 		//Following Will be converted to ints corresponding to appropriate square in grid
-		gridX = ""; //X position on grid to be colored 
-		gridY = ""; //Y position on grid to be colored
+		oldX = ""; //X position on grid to be colored 
+		oldY = ""; //Y position on grid to be colored
+		currentX="";
+		currentY="";
 		
 		//======end Coloring logic===============
 
@@ -82,8 +84,10 @@ public class Protocol {
 					command = Command.USERSINROOM;
 				else if (token.equals("INVITEMANY"))
 					command = Command.INVITEMANY;
-				else if (token.equals("COLOR_FILL")) //color fill for grid square
-					command = Command.COLOR_FILL;
+				else if (token.equals("COLOR_CLICK")) //color draw for click
+					command = Command.COLOR_CLICK;
+				else if (token.equals("COLOR_MOVE")) //color draw for mouse move
+					command = Command.COLOR_MOVE;
 				else
 					System.err.println("Warning, ["+token+"] is an unsupported command.");
 			} else if((command == Command.CREATE || command == Command.JOIN || command == Command.ALIAS ||
@@ -92,11 +96,18 @@ public class Protocol {
 				nameField = token;
 			} else if((command == Command.MSG) && nameField.length() > 0) {
 				textField = token;
-			} else if ((command == Command.COLOR_FILL)){ //logic for Color_Fill
+			} else if ((command == Command.COLOR_CLICK)){ //logic for COLOR_CLICK
 				if (i == 1) nameField = token;
 				else if (i==2) colorField = token;
-				else if (i==3) gridX = token;
-				else gridY = token;	
+				else if (i==3) oldX = token;
+				else oldY = token;	
+			} else if ((command == Command.COLOR_MOVE)){ //logic for COLOR_MOVE
+				if (i == 1) nameField = token;
+				else if (i==2) colorField = token;
+				else if (i==3) oldX = token;
+				else if (i==4) oldY = token;
+				else if (i==5) currentX = token;
+				else if (i==6) currentY = token;
 			} else if (((command == Command.TRANSCRIPT) && nameField.length() > 0) || (command == Command.INVITEMANY)) {
 				if (i == 1) nameField = token;
 				else messageField.add(token); 
@@ -180,15 +191,34 @@ public class Protocol {
 	 * @param action The command of the protocol
 	 * @param name The name field of the protocol
 	 * @param color The color field of the protocol
-	 * @param gridX The gridX field of the protocol
-	 * @param gridY the gridY field of the protocol
+	 * @param oldX The oldX field of the protocol
+	 * @param oldY the oldY field of the protocol
 	 */
-	public Protocol(Command action, String name, String color, String gridX, String gridY){
+	public Protocol(Command action, String name, String color, String oldX, String oldY){
 		command = action;
 		nameField = name;
 		colorField = color;
-		this.gridX = gridX;
-		this.gridY = gridY;
+		this.oldX = oldX;
+		this.oldY = oldY;
+	}
+	
+	/**
+	 * @param action The command of the protocol
+	 * @param name The name field of the protocol
+	 * @param color The color field of the protocol
+	 * @param oldX The oldX field of the protocol
+	 * @param oldY the oldY field of the protocol
+	 * @param currentX The currentX field of the protocol
+	 * @param currentY the currentY field of the protocol
+	 */
+	public Protocol(Command action, String name, String color, String oldX, String oldY, String currentX, String currentY){
+		command = action;
+		nameField = name;
+		colorField = color;
+		this.oldX = oldX;
+		this.oldY = oldY;
+		this.currentX = currentX;
+		this.currentY = currentY;
 	}
 
 }
