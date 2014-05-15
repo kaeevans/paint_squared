@@ -471,6 +471,10 @@ public class HomeWindow extends JFrame {
                 });
                 break;
                 
+            case COLOR_FILL: // likely uneeded in the HomeWindow
+            	//perform coloring updates
+            	break;
+                
             default:
                 System.err.println("Warning, client cannot parse command, "+update.command);
                 break;

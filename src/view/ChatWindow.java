@@ -124,6 +124,12 @@ public class ChatWindow extends JFrame {
     				writer.print("["+s+"]");
     			}
     			break;
+            case COLOR_FILL: //used as needed
+    			writer.print("["+p.nameField+"]");
+    			writer.print("["+p.colorField+"]");
+    			writer.print("["+p.gridX+"]");
+    			writer.print("["+p.gridY+"]");
+    			break;
             default:
                 writer.print("["+p.nameField+"]");
                 break;
@@ -181,6 +187,10 @@ public class ChatWindow extends JFrame {
                     }
                 });
                 break;
+                
+            case COLOR_FILL:
+            	//perform color fill updates
+            	break;
                 
             default:
                 System.err.println("Warning, client cannot parse command, "+update.command);
