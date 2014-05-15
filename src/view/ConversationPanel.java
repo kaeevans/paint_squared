@@ -160,7 +160,9 @@ public class ConversationPanel extends JPanel {
                 .addComponent(sendMessageButton)))
         .addGroup(layout.createParallelGroup(Alignment.TRAILING)
             .addComponent(canvasLabel)
-            .addComponent(canvas)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(canvas.drawPad)
+                .addComponent(canvas.panel))
             .addComponent(clearCanvasButton))
     );
     
@@ -179,7 +181,9 @@ public class ConversationPanel extends JPanel {
                     .addComponent(typedMsgPane)
                     .addComponent(sendMessageButton, Alignment.CENTER)))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(canvas)
+                .addGroup(layout.createParallelGroup()
+                    .addComponent(canvas.drawPad)
+                    .addComponent(canvas.panel))
                 .addComponent(clearCanvasButton))
         )
     );

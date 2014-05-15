@@ -31,6 +31,8 @@ public class CanvasPanel extends JPanel{
 	private final ChatWindow parent;
     private PrintWriter writer;
     private String convoName;
+    public JPanel panel;
+    public PadDraw drawPad;
 
 	public CanvasPanel(String convoName, ChatWindow owner, PrintWriter writer){
 	    this.convoName = convoName;
@@ -43,14 +45,14 @@ public class CanvasPanel extends JPanel{
 		Icon iconBl = new ImageIcon("black.gif");
 		Icon iconG = new ImageIcon("green.gif");
 				
-		Container content = this.parent.getContentPane();
-		content.setLayout(new BorderLayout());
+		// Container content = this.parent.getContentPane();
+		// content.setLayout(new BorderLayout());
 		
-		final PadDraw drawPad = new PadDraw();
+		drawPad = new PadDraw();
 		
-		content.add(drawPad, BorderLayout.CENTER);
+		// content.add(drawPad, BorderLayout.CENTER);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setPreferredSize(new Dimension(32, 68));
 		panel.setMinimumSize(new Dimension(32, 68));
 		panel.setMaximumSize(new Dimension(32, 68));
@@ -110,7 +112,7 @@ public class CanvasPanel extends JPanel{
 		panel.add(redButton);
 		panel.add(clearButton);
 		
-		content.add(panel, BorderLayout.WEST);
+		// content.add(panel, BorderLayout.WEST);
 	}
 }
 
