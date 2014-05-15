@@ -41,11 +41,12 @@ public class CanvasPanel extends JPanel{
 		this.parent = owner;
 		this.writer = writer;
 
-		Icon iconB = new ImageIcon("blue.gif");
-		Icon iconM = new ImageIcon("magenta.gif");
-		Icon iconR = new ImageIcon("red.gif");
-		Icon iconBl = new ImageIcon("black.gif");
-		Icon iconG = new ImageIcon("green.gif");
+
+	    Icon iconB = new ImageIcon("./resources/blue.gif");
+		Icon iconM = new ImageIcon("./resources/magenta.gif");
+		Icon iconR = new ImageIcon("./resources/red.gif");
+		Icon iconBl = new ImageIcon("./resources/black.gif");
+		Icon iconG = new ImageIcon("./resources/green.gif");
 
 		// Container content = this.parent.getContentPane();
 		// content.setLayout(new BorderLayout());
@@ -74,7 +75,6 @@ public class CanvasPanel extends JPanel{
 			public void actionPerformed(ActionEvent e){
 				drawPad.red();
 			}
-
 		});
 
 		JButton blackButton = new JButton(iconBl);
@@ -104,6 +104,19 @@ public class CanvasPanel extends JPanel{
 				drawPad.green();
 			}
 		});
+
+		
+		// redButton.setBackground(Color.RED);
+		// redButton.setOpaque(true);
+		// blackButton.setBackground(Color.BLACK);
+		// blackButton.setOpaque(true);
+		// magentaButton.setBackground(Color.MAGENTA);
+		// magentaButton.setOpaque(true);
+		// blueButton.setBackground(Color.BLUE);
+		// blueButton.setOpaque(true);
+		// greenButton.setBackground(Color.GREEN);
+		// greenButton.setOpaque(true);
+
 		blackButton.setPreferredSize(new Dimension(16, 16));
 		magentaButton.setPreferredSize(new Dimension(16, 16));
 		redButton.setPreferredSize(new Dimension(16, 16));
